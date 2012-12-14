@@ -78,11 +78,11 @@ def floquet_modes(H, T, args=None, sort=False):
     # the quasi energy is in the interval [-pi/T, pi/T] where T is the
     # period of the driving.  eargs += (eargs <= -2*pi) * (2*pi) +
     # (eargs > 0) * (-2*pi)
-    eargs  += (eargs <= -pi) * (2 * pi) + (eargs > pi) * (-2 * pi)
+    eargs += (eargs <= -pi) * (2 * pi) + (eargs > pi) * (-2 * pi)
     e_quasi = -eargs / T
 
     # sort by the quasi energy
-    if sort == True:
+    if sort is True:
         order = np.argsort(-e_quasi)
     else:
         order = list(range(len(evals)))
@@ -516,7 +516,7 @@ def floquet_master_equation_rates(f_modes_0, f_energies, c_op, H, T,
             for k in range(-kmax, kmax + 1, 1):
                 Delta[a, b, k_idx] = f_energies[a] - f_energies[b] + k * omega
                 Gamma[a, b, k_idx] = 2 * pi * Heaviside(Delta[a, b, k_idx]) * \
-                    J_cb(Delta[a, b, k_idx]) * abs(X[a, b, k_idx])**2
+                    J_cb(Delta[a, b, k_idx]) * abs(X[a, b, k_idx]) ** 2
                 k_idx += 1
 
     for a in range(N):
@@ -694,7 +694,6 @@ def floquet_markov_mesolve(R, ekets, rho0, tlist, e_ops, options=None):
 
     else:
         raise TypeError("Expectation parameter must be a list or a function")
-
 
     #
     # transform the initial density matrix and the e_ops opterators to the
