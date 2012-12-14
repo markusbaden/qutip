@@ -92,7 +92,7 @@ def essolve(H, rho0, tlist, c_op_list, expt_op_list):
 # -----------------------------------------------------------------------------
 #
 #
-def ode2es(L,rho0):
+def ode2es(L, rho0):
     """Creates an exponential series that describes the time evolution for the
     initial density matrix (or state vector) `rho0`, given the Liouvillian
     (or Hamiltonian) `L`.
