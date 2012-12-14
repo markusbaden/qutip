@@ -326,7 +326,7 @@ class eseries():
         for ur_key in unique_rates.keys():
             total_ampl = np.sum(ampl_dict[ur_key])
 
-            if isinstance(total_ampl, float) or isinstance(total_ampl, complex):
+            if isinstance(total_ampl, (float, complex)):
                 if abs(total_ampl) > ampl_tol:
                     self.rates = np.append(self.rates, unique_rates[ur_key])
                     self.ampl = np.append(self.ampl, total_ampl)
