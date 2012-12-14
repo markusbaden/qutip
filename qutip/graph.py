@@ -20,7 +20,7 @@ import qutip.settings
 
 if qutip.settings.qutip_graphics == 'YES':
     from pylab import *
-    from matplotlib import pyplot, mpl,cm
+    from matplotlib import pyplot, mpl, cm
     from mpl_toolkits.mplot3d import Axes3D
 
 from qutip.qobj import Qobj, isket, isbra
@@ -84,7 +84,7 @@ def hinton(rho, xlabels=None, ylabels=None, title=None, ax=None):
         W = rho
 
     if ax is None:
-        fig, ax = subplots(1, 1, figsize=(8,6))
+        fig, ax = subplots(1, 1, figsize=(8, 6))
 
     if not (xlabels or ylabels):
         ax.axis('off')
@@ -99,26 +99,26 @@ def hinton(rho, xlabels=None, ylabels=None, title=None, ax=None):
         w_max = 1.0
 
     # x axis
-    ax.xaxis.set_major_locator(IndexLocator(1,0.5))
+    ax.xaxis.set_major_locator(IndexLocator(1, 0.5))
     if xlabels:
         ax.set_xticklabels(xlabels)
     ax.tick_params(axis='x', labelsize=14)
 
     # y axis
-    ax.yaxis.set_major_locator(IndexLocator(1,0.5))
+    ax.yaxis.set_major_locator(IndexLocator(1, 0.5))
     if ylabels:
         ax.set_yticklabels(list(reversed(ylabels)))
     ax.tick_params(axis='y', labelsize=14)
 
-    ax.fill(array([0,width,width,0]),array([0,0,height,height]), color=cm.RdBu(128))
+    ax.fill(array([0, width, width, 0]), array([0, 0, height, height]), color=cm.RdBu(128))
     for x in range(width):
         for y in range(height):
             _x = x + 1
             _y = y + 1
-            if real(W[x,y]) > 0.0:
-                _blob(_x - 0.5, height - _y + 0.5, abs(W[x,y]), w_max, min(1,abs(W[x,y]) / w_max))
+            if real(W[x, y]) > 0.0:
+                _blob(_x - 0.5, height - _y + 0.5, abs(W[x, y]), w_max, min(1, abs(W[x, y]) / w_max))
             else:
-                _blob(_x - 0.5, height - _y + 0.5, -abs(W[x,y]), w_max, min(1,abs(W[x,y]) / w_max))
+                _blob(_x - 0.5, height - _y + 0.5, -abs(W[x, y]), w_max, min(1, abs(W[x, y]) / w_max))
 
 
     # color axis
@@ -170,7 +170,7 @@ def matrix_histogram(M, xlabels=None, ylabels=None, title=None, limits=None, ax=
         M = M.full()
 
     n = size(M)
-    xpos,ypos = meshgrid(range(M.shape[0]),range(M.shape[1]))
+    xpos, ypos = meshgrid(range(M.shape[0]), range(M.shape[1]))
     xpos = xpos.T.flatten() - 0.5
     ypos = ypos.T.flatten() - 0.5
     zpos = zeros(n)
@@ -198,19 +198,19 @@ def matrix_histogram(M, xlabels=None, ylabels=None, title=None, limits=None, ax=
         plt.title(title)
 
     # x axis
-    ax.axes.w_xaxis.set_major_locator(IndexLocator(1,-0.5))
+    ax.axes.w_xaxis.set_major_locator(IndexLocator(1, -0.5))
     if xlabels:
         ax.set_xticklabels(xlabels)
     ax.tick_params(axis='x', labelsize=14)
 
     # y axis
-    ax.axes.w_yaxis.set_major_locator(IndexLocator(1,-0.5))
+    ax.axes.w_yaxis.set_major_locator(IndexLocator(1, -0.5))
     if ylabels:
         ax.set_yticklabels(ylabels)
     ax.tick_params(axis='y', labelsize=14)
 
     # z axis
-    ax.axes.w_zaxis.set_major_locator(IndexLocator(1,0.5))
+    ax.axes.w_zaxis.set_major_locator(IndexLocator(1, 0.5))
     ax.set_zlim3d([z_min, z_max])
 
     # color axis
@@ -264,7 +264,7 @@ def matrix_histogram_complex(M, xlabels=None, ylabels=None, title=None, limits=N
         M = M.full()
 
     n = size(M)
-    xpos,ypos = meshgrid(range(M.shape[0]),range(M.shape[1]))
+    xpos, ypos = meshgrid(range(M.shape[0]), range(M.shape[1]))
     xpos = xpos.T.flatten() - 0.5
     ypos = ypos.T.flatten() - 0.5
     zpos = zeros(n)
@@ -315,13 +315,13 @@ def matrix_histogram_complex(M, xlabels=None, ylabels=None, title=None, limits=N
         plt.title(title)
 
     # x axis
-    ax.axes.w_xaxis.set_major_locator(IndexLocator(1,-0.5))
+    ax.axes.w_xaxis.set_major_locator(IndexLocator(1, -0.5))
     if xlabels:
         ax.set_xticklabels(xlabels)
     ax.tick_params(axis='x', labelsize=12)
 
     # y axis
-    ax.axes.w_yaxis.set_major_locator(IndexLocator(1,-0.5))
+    ax.axes.w_yaxis.set_major_locator(IndexLocator(1, -0.5))
     if ylabels:
         ax.set_yticklabels(ylabels)
     ax.tick_params(axis='y', labelsize=12)
@@ -337,13 +337,13 @@ def matrix_histogram_complex(M, xlabels=None, ylabels=None, title=None, limits=N
     cax, kw = mpl.colorbar.make_axes(ax, shrink=.75, pad=.0)
     cb = mpl.colorbar.ColorbarBase(cax, cmap=cmap, norm=norm)
     cb.set_ticks([-pi, -pi / 2, 0, pi / 2, pi])
-    cb.set_ticklabels((r'$-\pi$',r'$-\pi/2$',r'$0$',r'$\pi/2$',r'$\pi$'))
+    cb.set_ticklabels((r'$-\pi$', r'$-\pi/2$', r'$0$', r'$\pi/2$', r'$\pi$'))
     cb.set_label('arg')
 
     return ax
 
 
-def energy_level_diagram(H_list, N=0, figsize=(8,12), labels=None):
+def energy_level_diagram(H_list, N=0, figsize=(8, 12), labels=None):
     """
     Plot the energy level diagrams for a list of Hamiltonians. Include
     up to N energy levels. For each element in H_list, the energy
@@ -392,7 +392,7 @@ def energy_level_diagram(H_list, N=0, figsize=(8,12), labels=None):
     x = 0
     evals0 = H.eigenenergies(eigvals=N) / (2 * np.pi)
     for e_idx, e in enumerate(evals0[:N]):
-        axes.plot([x,x + 2], np.array([1,1]) * e, 'b', linewidth=2)
+        axes.plot([x, x + 2], np.array([1, 1]) * e, 'b', linewidth=2)
     xticks.append(x + 1)
     x += 2
 
@@ -402,11 +402,11 @@ def energy_level_diagram(H_list, N=0, figsize=(8,12), labels=None):
         evals1 = H.eigenenergies() / (2 * np.pi)
 
         for e_idx, e in enumerate(evals1[:N]):
-            axes.plot([x,x + 1], np.array([evals0[e_idx], e]), 'k:')
+            axes.plot([x, x + 1], np.array([evals0[e_idx], e]), 'k:')
         x += 1
 
         for e_idx, e in enumerate(evals1[:N]):
-            axes.plot([x,x + 2], np.array([1,1]) * e, 'b', linewidth=2)
+            axes.plot([x, x + 2], np.array([1, 1]) * e, 'b', linewidth=2)
         xticks.append(x + 1)
         x += 2
 
