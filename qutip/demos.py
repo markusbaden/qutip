@@ -16,15 +16,15 @@
 # Copyright (C) 2011-2012, Paul D. Nation & Robert J. Johansson
 #
 ###########################################################################
-import sys,os
-from scipy import arange,array,any
+import sys, os
+from scipy import arange, array, any
 
 import qutip.settings as settings
 
 if settings.qutip_graphics == 'YES':
     import qutip.examples as examples
     from qutip.examples import exconfig
-    from qutip.examples.examples_text import button_labels,button_nums
+    from qutip.examples.examples_text import button_labels, button_nums
 
 def demos():
     """
@@ -46,11 +46,11 @@ def demos():
             from PySide import QtGui, QtCore
         elif settings.qutip_gui == "PYQT4":
             from PyQt4 import QtGui, QtCore
-        def start_gui(ver,direc):
+        def start_gui(ver, direc):
             app = QtGui.QApplication.instance()#checks if QApplication already exists (needed for iPython)
             if not app:#create QApplication if it doesnt exist
                 app = QtGui.QApplication(sys.argv)
-            gui = Examples(ver,direc)
+            gui = Examples(ver, direc)
             gui.show()
             gui.activateWindow()
             gui.raise_()
@@ -68,7 +68,7 @@ def demos():
                 ver = qutip._version.short_version
             else:
                 ver = 'HEAD'
-            start_gui(ver,direc)
+            start_gui(ver, direc)
             if not exconfig.option == 123456:
                 example_code = compile('examples.ex_' + str(exconfig.option) + '.run()', '<string>', 'exec')
                 eval(example_code)
@@ -97,7 +97,7 @@ def demos():
                         print('[0] Exit Demos')
                     #in between screens
                     else:
-                        tt = ["Master Equation","Monte Carlo","Time-Dependent"]
+                        tt = ["Master Equation", "Monte Carlo", "Time-Dependent"]
                         print("\nQuTiP " + tt[exconfig.cmd_screen - 2] + " Example Scripts:")
                         print('======================================')
                         for jj in range(len(bnums)):
