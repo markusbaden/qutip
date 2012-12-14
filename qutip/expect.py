@@ -23,7 +23,7 @@ import numpy as np
 import scipy.sparse as sp
 
 
-def expect(oper,state):
+def expect(oper, state):
     '''Calculates the expectation value for operator and state(s).
 
     Parameters
@@ -134,4 +134,4 @@ def variance(oper, state):
         Variance of operator 'oper' for given state.
 
     """
-    return expect(oper**2, state) - expect(oper, state)**2
+    return expect(oper ** 2, state) - expect(oper, state) ** 2
