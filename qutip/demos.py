@@ -16,7 +16,8 @@
 # Copyright (C) 2011-2012, Paul D. Nation & Robert J. Johansson
 #
 ###########################################################################
-import sys, os
+import sys
+import os
 from scipy import arange, array, any
 
 import qutip.settings as settings
@@ -26,13 +27,14 @@ if settings.qutip_graphics == 'YES':
     from qutip.examples import exconfig
     from qutip.examples.examples_text import button_labels, button_nums
 
+
 def demos():
     """
     Calls the demos scripts via a GUI window if PySide
-    or PyQt4 are avaliable.  Otherwise, a commandline 
+    or PyQt4 are avaliable.  Otherwise, a commandline
     interface is given in the terminal.
     """
-    if settings.qutip_graphics == 'NO': #check for matplotlib
+    if settings.qutip_graphics == 'NO':  # check for matplotlib
         print('Demos unavailable. Matplotlib was not found.')
         return
     direc = os.path.dirname(__file__)
@@ -47,8 +49,12 @@ def demos():
         elif settings.qutip_gui == "PYQT4":
             from PyQt4 import QtGui, QtCore
         def start_gui(ver, direc):
-            app = QtGui.QApplication.instance()#checks if QApplication already exists (needed for iPython)
-            if not app:#create QApplication if it doesnt exist
+
+            # check if QApplication already exists (needed for iPython)
+            app = QtGui.QApplication.instance()
+
+            # create QApplication if it doesnt exist
+            if not app:
                 app = QtGui.QApplication(sys.argv)
             gui = Examples(ver, direc)
             gui.show()
@@ -59,7 +65,7 @@ def demos():
         opts = array([button_nums[k] for k in range(len(button_nums))])
         lopts = arange(len(opts))
     exconfig.option = 0
-    
+
     while exconfig.option < 123456:
         exconfig.option = 123456
         if settings.qutip_gui != 'NONE':
@@ -70,7 +76,10 @@ def demos():
                 ver = 'HEAD'
             start_gui(ver, direc)
             if not exconfig.option == 123456:
-                example_code = compile('examples.ex_' + str(exconfig.option) + '.run()', '<string>', 'exec')
+                example_code = compile(
+                    'examples.ex_' + str(exconfig.option) + '.run()',
+                    '<string>',
+                    'exec')
                 eval(example_code)
         else:
             #---Commandline Demos output---#
@@ -97,8 +106,14 @@ def demos():
                         print('[0] Exit Demos')
                     #in between screens
                     else:
-                        tt = ["Master Equation", "Monte Carlo", "Time-Dependent"]
-                        print("\nQuTiP " + tt[exconfig.cmd_screen - 2] + " Example Scripts:")
+                        tt = ["Master Equation",
+                              "Monte Carlo",
+                              "Time-Dependent"]
+
+                        print("\nQuTiP " +
+                              tt[exconfig.cmd_screen - 2] +
+                              " Example Scripts:")
+
                         print('======================================')
                         for jj in range(len(bnums)):
                             print("[" + str(bnums[jj]) + "] " + blabels[jj])
@@ -132,7 +147,7 @@ def demos():
                                 else:
                                     exconfig.cmd_screen -= 1
                                 exconfig.option = 123456
-                                break 
+                                break
                             elif any(userinpt == opts[exconfig.cmd_screen - 1]):
                                 exconfig.option = userinpt
                                 break
@@ -144,15 +159,13 @@ def demos():
                         print('It seems you cannot pick a valid option...\n')
                         return
                     if not exconfig.option == 123456:
-                        example_code = compile('examples.ex_' + str(exconfig.option) + '.run()', '<string>', 'exec')
+                        example_code = compile(
+                            'examples.ex_' + str(exconfig.option) + '.run()',
+                            '<string>',
+                            'exec')
                         eval(example_code)
-                    
+
             else:
                 #raise exception if running demos from scipt with no GUI.
-                raise Exception('Demos must be run from the terminal if no GUI is avaliable.')
-        
-        
-        
-            
-            
-            
+                raise Exception('Demos must be run from the ' +
+                                'terminal if no GUI is avaliable.')
